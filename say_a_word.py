@@ -29,7 +29,7 @@ class readwords(object):
 		elif index == '高考核心985词汇':
 			filename = 'highschool985Words.csv'
 		# CSV读入单词列表
-		c46 = pd.read_csv('wordlists/'+filename)
+		c46 = pd.read_csv(filename)
 		st.write(f'总共用{c46.shape[0]}个单词')
 		# 输入起始位置
 		startnum = st.number_input("输入从第几个单词开始")
