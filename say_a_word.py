@@ -59,7 +59,7 @@ class readwords(object):
 		for i in range(startnum,endnum):
 			w1 = c46[i][0]
 			# 显示英文
-			c1, c2, c3 = st.columns(3)
+			c1, c2 = st.columns(2)
 			with c1:
 				st.header(w1)
 				# engine.say(w1)
@@ -68,10 +68,11 @@ class readwords(object):
 			with c2:
 				w2 = c46[i][1]
 				st.write(f'...   {i}   ...')
+				time.sleep(0.7)
 				st.write(w2)
 			time.sleep(0.3)
 		# 关闭播音
-		engine.stop()
+		# engine.stop()
 
 if __name__ == '__main__':
 	rw = readwords()
