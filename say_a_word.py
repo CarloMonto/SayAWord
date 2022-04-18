@@ -4,7 +4,7 @@ topic: 单词朗读软件
 """
 import streamlit as st
 import pyttsx3
-import pandas as pd
+import csv
 import time
 import os
 
@@ -29,8 +29,12 @@ class readwords(object):
 		elif index == '高考核心985词汇':
 			filename = 'highschool985Words.csv'
 		# CSV读入单词列表
-		c46 = pd.read_csv(filename)
-		st.write(f'总共用{c46.shape[0]}个单词')
+		with open(filename, encoding='utf-8') as f:
+			reader = csv.reader(f)
+			c46 = []
+			for row in reader:
+				c46.append(row)
+		st.write(f'总共用{len(c46)-1}个单词')
 		# 输入起始位置
 		startnum = st.number_input("输入从第几个单词开始")
 		endnum = st.number_input("输入到第几个单词结束")
@@ -38,13 +42,13 @@ class readwords(object):
 			startnum = 1
 		if startnum <= 0:
 			startnum =1
-		if endnum > c46.shape[0]:
-			endnum = c46.shape[0]
+		if endnum > len(c46):
+			endnum = len(c46)
 		if st.button("提交"):
 			num = endnum - startnum
 			st.write(f'总共{num+1}个单词，预计需要{int((num*38)/600)}分钟')
 			start = time.time()
-			self.toSpeake(c46, int(startnum-1), int(endnum))
+			self.toSpeake(c46, int(startnum), int(endnum+1))
 			end = time.time()
 			st.write(f'总共用时{int((end-start)/60)}分钟')
 
@@ -53,7 +57,7 @@ class readwords(object):
 		engine = pyttsx3.init()
 		# 显示并朗读
 		for i in range(startnum,endnum):
-			w1 = c46.loc[i, 'item']
+			w1 = c46[i][0]
 			engine.say(w1)
 			engine.runAndWait()
 			# 显示英文
@@ -64,8 +68,8 @@ class readwords(object):
 				engine.runAndWait()
 			# 显示翻译
 			with c2:
-				w2 = c46.loc[i, 'translate']
-				st.write(f'...   {i+1}   ...')
+				w2 = c46[i][1]
+				st.write(f'...   {i}   ...')
 				st.write(w2)
 			time.sleep(0.3)
 		# 关闭播音
