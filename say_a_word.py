@@ -62,8 +62,8 @@ class readwords(object):
 			c1, c2, c3 = st.columns(3)
 			with c1:
 				st.header(w1)
-				engine.say(w1)
-				engine.runAndWait()
+				# engine.say(w1)
+				# engine.runAndWait()
 			# 显示翻译
 			with c2:
 				w2 = c46[i][1]
