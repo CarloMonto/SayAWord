@@ -54,7 +54,7 @@ class readwords(object):
 
 	def toSpeake(self, c46, startnum, endnum):
 		# 初始化
-		engine = pyttsx3.init()
+		# engine = pyttsx3.init()
 		# 显示并朗读
 		for i in range(startnum,endnum):
 			w1 = c46[i][0]
