@@ -58,8 +58,6 @@ class readwords(object):
 		# 显示并朗读
 		for i in range(startnum,endnum):
 			w1 = c46[i][0]
-			engine.say(w1)
-			engine.runAndWait()
 			# 显示英文
 			c1, c2, c3 = st.columns(3)
 			with c1:
